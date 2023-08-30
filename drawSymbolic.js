@@ -35,6 +35,31 @@ function drawLink(input, output) {
   ctx.stroke();
 }
 
+function drawPorts(c, ports) {
+  ctx.font = "20px Arial";
+
+  var io = [];
+
+  for (var i = 0; i < ports.length; i++) {
+    var offset = 100 / (ports.length + 1);
+    var port = {
+      name: ports[i],
+      x: c.x - 5,
+      y: c.y + offset + (i * offset)
+    }
+    io.push(port);
+
+    ctx.fillStyle = "#111111";
+    ctx.fillRect(port.x - 5, port.y - 5, 10, 10);
+
+    ctx.fillStyle = "#111111";
+    ctx.textAlign = "right";
+    ctx.fillText(ports[i], port.x - 10, port.y + 5);
+  }
+
+  return io;
+}
+
 function drawSymbolic(type) {
   for (let c of components) {
     if (c.type == type) {
