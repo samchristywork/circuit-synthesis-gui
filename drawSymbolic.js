@@ -25,6 +25,16 @@ function drawComponent(c, color, index) {
   return io;
 }
 
+function drawLink(input, output) {
+  ctx.strokeStyle = "#111111";
+  ctx.lineWidth = 2;
+
+  ctx.beginPath();
+  ctx.moveTo(input.x, input.y);
+  ctx.lineTo(output.x, output.y);
+  ctx.stroke();
+}
+
 function drawSymbolic(type) {
   for (let c of components) {
     if (c.type == type) {
