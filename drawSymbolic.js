@@ -35,7 +35,7 @@ function drawLink(input, output) {
   ctx.stroke();
 }
 
-function drawPorts(c, ports) {
+function drawPorts(c, ports, side) {
   ctx.font = "20px Arial";
 
   var io = [];
@@ -44,7 +44,7 @@ function drawPorts(c, ports) {
     var offset = 100 / (ports.length + 1);
     var port = {
       name: ports[i],
-      x: c.x - 5,
+      x: c.x + (side == "left" ? -5 : 105),
       y: c.y + offset + (i * offset)
     }
     io.push(port);
@@ -53,8 +53,13 @@ function drawPorts(c, ports) {
     ctx.fillRect(port.x - 5, port.y - 5, 10, 10);
 
     ctx.fillStyle = "#111111";
-    ctx.textAlign = "right";
-    ctx.fillText(ports[i], port.x - 10, port.y + 5);
+    if (side == "left") {
+      ctx.textAlign = "right";
+      ctx.fillText(ports[i], port.x - 10, port.y + 5);
+    } else {
+      ctx.textAlign = "left";
+      ctx.fillText(ports[i], port.x + 10, port.y + 5);
+    }
   }
 
   return io;
@@ -62,12 +67,12 @@ function drawPorts(c, ports) {
 
 function drawInputs(c) {
   var ports = getInputs(c);
-  return drawPorts(c, ports);
+  return drawPorts(c, ports, "left");
 }
 
 function drawOutputs(c) {
   var ports = getOutputs(c);
-  return drawPorts(c, ports);
+  return drawPorts(c, ports, "right");
 }
 
 function drawSymbolic(type) {
