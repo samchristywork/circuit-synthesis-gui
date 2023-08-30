@@ -60,6 +60,16 @@ function drawPorts(c, ports) {
   return io;
 }
 
+function drawInputs(c) {
+  var ports = getInputs(c);
+  return drawPorts(c, ports);
+}
+
+function drawOutputs(c) {
+  var ports = getOutputs(c);
+  return drawPorts(c, ports);
+}
+
 function drawSymbolic(type) {
   for (let c of components) {
     if (c.type == type) {
