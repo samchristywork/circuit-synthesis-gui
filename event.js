@@ -47,3 +47,20 @@ document.addEventListener("keydown", function(e) {
 
   render();
 });
+
+canvas.addEventListener("mousemove", function(e) {
+  var i = findComponent(currentComponent);
+
+  var x = 2 * (e.clientX - canvas.offsetLeft - 25);
+  var y = 2 * (e.clientY - canvas.offsetTop - 25);
+
+  x = Math.round(x / 50) * 50;
+  y = Math.round(y / 50) * 50;
+
+  if (selectedSubassembly != null) {
+    components[i].subassembly[selectedSubassembly][2] = x;
+    components[i].subassembly[selectedSubassembly][3] = y;
+  }
+
+  render();
+});
