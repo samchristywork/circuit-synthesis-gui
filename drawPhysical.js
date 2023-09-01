@@ -25,6 +25,8 @@ function drawPhysical(c, px, py) {
         if (col == " ") {
           x2 += 20;
           continue;
+        } else if (col == "&" || col == "|" || col == "^") {
+          ctx.fillStyle = "#7777ff";
         } else if (col == col.toLowerCase()) {
           ctx.fillStyle = "#77ff77";
         } else if (col == col.toUpperCase()) {
