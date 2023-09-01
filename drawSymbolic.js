@@ -75,9 +75,61 @@ function drawOutputs(c) {
   return drawPorts(c, ports, "right");
 }
 
+function drawAssembly(c) {
+  var subassembly = c.subassembly;
+  var links = c.links;
+
+  var io = {};
+
+  // draw subassemblies
+  for (let i = 0; i < subassembly.length; i++) {
+    var s = subassembly[i];
+
+    var id = s[0];
+    var type = s[1];
+    var x = s[2];
+    var y = s[3];
+
+    var found = false;
+    for (let c of components) {
+      if (c.type == type) {
+        c.x = x;
+        c.y = y;
+        c.id = id;
+
+        if (i == selectedSubassembly) {
+          var ports = drawComponent(c, "#ffffff", i);
+          io[id] = ports;
+        } else {
+          var ports = drawComponent(c, "#aaaaaa", i);
+          io[id] = ports;
+        }
+
+        found = true;
+
+        break;
+      }
+    }
+    if (!found) {
+      console.log("could not find component: " + type);
+    }
+  }
+
+  for (let l of links) {
+    var from = l[0];
+    var fromPort = l[1];
+    var to = l[2];
+    var toPort = l[3];
+
+    drawLink(io[from].outputs[fromPort], io[to].inputs[toPort]);
+  }
+}
+
 function drawSymbolic(type) {
   for (let c of components) {
     if (c.type == type) {
+      drawAssembly(c);
+
       drawPhysical(c, 0, 0);
 
       return
