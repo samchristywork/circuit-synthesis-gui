@@ -361,4 +361,107 @@ var components = [
       ]
     ]
   },
+  {
+    "type": "2 bit adder",
+    "subassembly": [
+      [
+        "cin",
+        "input",
+        0,
+        0
+      ],
+      [
+        "a",
+        "input",
+        0,
+        200
+      ],
+      [
+        "b",
+        "input",
+        0,
+        400
+      ],
+      [
+        "add-top",
+        "full adder",
+        200,
+        100
+      ],
+      [
+        "add-bot",
+        "full adder",
+        200,
+        300
+      ],
+      [
+        "c",
+        "output",
+        400,
+        100
+      ],
+      [
+        "cout",
+        "output",
+        400,
+        300
+      ]
+    ],
+    "links": [
+      [
+        "cin",
+        0,
+        "add-top",
+        0
+      ],
+      [
+        "a",
+        0,
+        "add-top",
+        1
+      ],
+      [
+        "a",
+        0,
+        "add-bot",
+        1
+      ],
+      [
+        "b",
+        0,
+        "add-top",
+        2
+      ],
+      [
+        "b",
+        0,
+        "add-bot",
+        2
+      ],
+      [
+        "add-top",
+        1,
+        "add-bot",
+        0
+      ],
+      [
+        "add-top",
+        0,
+        "c",
+        0
+      ],
+      [
+        "add-bot",
+        0,
+        "c",
+        0
+      ],
+      [
+        "add-bot",
+        1,
+        "cout",
+        0
+      ]
+    ]
+  },
 ]
